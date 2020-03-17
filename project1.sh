@@ -22,8 +22,8 @@ plink --file GorgorWholeGen --make-bed --out GorgorWholeGen
 plink --bfile GorgorWholeGen --noweb --keep sampleID.txt --recode --out ../datatest21/test10
 #make bed file for whole genome file of 9 individuals we want 
 plink --file test10 --make-bed --out test10
-#pick chromosome 21 of 9 individuals 
-plink --bfile test10 --chr 21 --out 待定
+#pick chromosome 21 of 9 individuals and fiter data (先不用LD)
+plink --bfile test10 --chr 21 --hwe .001 --geno 0.02 --thin 0.8 --maf 0.05 --make-bed --out test21
 
 #########END###########
 
