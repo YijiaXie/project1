@@ -1,0 +1,11 @@
+#####
+awk '{print $1,$2,$2}' GorgorWholeGenFID.ped #在另一个文件夹，并写入clust文件
+
+plink --bfile allsample21.clean  --freq --missing --within allsample21.clean.clust
+gzip plink.frq.strat
+python plink2treemix.py plink.frq.strat.gz  treemix.gz
+treemix -i treemix.gz -root 5 -k 2  -o allstem
+##############在R里面
+source("../tree/treemix-1.13/src/plotting_funcs.R")
+png("treemix.png")
+plot_tree("allstem")
