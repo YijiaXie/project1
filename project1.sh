@@ -57,14 +57,8 @@ plink --bfile GorgorWholeGenFID --noweb --keep sampleID.txt --recode --out ../FI
 plink --file test10 --make-bed --out test10
 #pick chromosome 21 of 9 individuals and fiter data (先不用LD)
 plink --bfile test10 --chr 21 --hwe .001 --geno 0.02 --thin 0.8 --maf 0.05 --make-bed --out test21.clean
-   
-# divide each subspecies
-plink --bfile test21.clean --family --keep-cluster-names Gbb --make-bed --out Gbb 
-plink --bfile test21.clean --family --keep-cluster-names Gbg --make-bed --out Gbg 
-plink --bfile test21.clean --family --keep-cluster-names Ggg --make-bed --out Ggg 
-plink --bfile test21.clean --family --keep-cluster-names Ggd --make-bed --out Ggd 
 
-####PCA#####
+######PCA######
 # do PCA (for all, for west ,for east)
 plink --bfile test21.clean --noweb --keep sampleID_east.txt --recode --make-bed --out test21.clean.east
 plink --bfile test21.clean --noweb --keep sampleID_west.txt --recode --make-bed --out test21.clean.west
@@ -73,8 +67,24 @@ plink --bfile test21.clean.west --pca 10 --out ./PCA_for_10/test21_pca10.clean.w
 plink --bfile test21.clean.east --pca 10 --out ./PCA_for_10/test21_pca10.clean.east 
 Rscript do_PCA.r
 
-####admixture###### 
+######admixture###### 
 #find the K with the lowest number of errors
 for i in 2 3 4 5; do admixture --cv test21.clean.bed $i; done > cvoutput
 grep -i 'CV error' cvoutput
 Rscript do_Admixture.r
+
+#######LD######### use chr 4
+#pick chromosome 4 of 10 individuals and fiter data
+plink --bfile test10 --chr 4 --hwe .001 --geno 0.02 --thin 0.8 --maf 0.05 --make-bed --out test4.clean
+#这一步暂时用不到makebed
+#plink --bfile test4.clean --family --keep-cluster-names Gbb --make-bed --out Gbb  
+#divide each subspecies (chr4)
+plink --bfile test4.clean --family --keep-cluster-names Gbb --recode --out Gbb
+plink --bfile test4.clean --family --keep-cluster-names Gbg --recode --out Gbg   
+plink --bfile test4.clean --family --keep-cluster-names Ggd --recode --out Ggd   
+plink --bfile test4.clean --family --keep-cluster-names Ggg --recode --out Ggg  
+#LD anaysis 
+plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Gbb_block
+plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Gbg_block 
+plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Ggd_block #only one ? 要分析吗
+plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Ggg_block     
