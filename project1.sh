@@ -69,8 +69,8 @@ Rscript do_PCA.r
 
 ######admixture###### 
 #find the K with the lowest number of errors
-for i in 2 3 4 5; do admixture --cv test21.clean.bed $i; done > cvoutput
-grep -i 'CV error' cvoutput
+for i in 2 3 4 5; do admixture --cv test21.clean.bed $i; done > ./admixture/cvoutput
+grep -i 'CV error' ./admixture/cvoutput
 Rscript do_Admixture.r
 
 #######LD######### use chr 4
@@ -88,3 +88,22 @@ plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Gbb_block
 plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Gbg_block 
 plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Ggd_block #only one ? 要分析吗
 plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Ggg_block     
+
+
+######heter#######
+plink --noweb --file Gbb --freq --out ./het/Gbb
+plink --noweb --file Gbg --freq --out ./het/Gbg
+plink --noweb --file Ggd --freq --out ./het/Ggd
+plink --noweb --file Ggg --freq --out ./het/Ggg
+cat ./het/Gbb.frq |grep -v NA > ./het/Gbb_noNA.frq
+cat ./het/Gbg.frq |grep -v NA > ./het/Gbg_noNA.frq
+cat ./het/Ggd.frq |grep -v NA > ./het/Ggd_noNA.frq
+cat ./het/Ggg.frq |grep -v NA > ./het/Ggg_noNA.frq
+Rscript do_het.r
+
+
+#####inbreeding coefficient######
+plink --file Gbb --het --out ./inbreed/Gbb
+plink --file Ggg --het --out ./inbreed/Ggg
+plink --file Gbg --het --out ./inbreed/Gbg
+plink --file Gbg --het --out ./inbreed/Gbg
