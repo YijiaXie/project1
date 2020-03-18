@@ -102,7 +102,7 @@ cat ./het/Ggg.frq |grep -v NA > ./het/Ggg_noNA.frq
 Rscript do_het.r
 
 
-#####inbreeding coefficient######
+#####inbreeding coefficient#######
 plink --file Gbb --het --out ./inbreed/Gbb
 plink --file Ggg --het --out ./inbreed/Ggg
 plink --file Gbg --het --out ./inbreed/Gbg
