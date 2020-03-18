@@ -56,7 +56,7 @@ plink --bfile GorgorWholeGenFID --noweb --keep sampleID.txt --recode --out ../FI
 #make bed file for whole genome file of 9 individuals we want 
 plink --file test10 --make-bed --out test10
 #pick chromosome 21 of 9 individuals and fiter data (先不用LD)
-plink --bfile test10 --chr 21 --hwe .001 --geno 0.02 --thin 0.8 --maf 0.05 --make-bed --out test21.clean
+plink --bfile test10 --chr 21 --hwe .001 --geno 0.02 --thin 0.2 --maf 0.05 --make-bed --out test21.clean
 
 ######PCA######
 # do PCA (for all, for west ,for east)
@@ -75,7 +75,7 @@ Rscript do_Admixture.r
 
 #######LD######### use chr 4
 #pick chromosome 4 of 10 individuals and fiter data
-plink --bfile test10 --chr 4 --hwe .001 --geno 0.02 --thin 0.8 --maf 0.05 --make-bed --out test4.clean
+plink --bfile test10 --chr 4 --hwe .001 --geno 0.02 --thin 0.2 --maf 0.05 --make-bed --out test4.clean
 #这一步暂时用不到makebed
 #plink --bfile test4.clean --family --keep-cluster-names Gbb --make-bed --out Gbb  
 #divide each subspecies (chr4)
