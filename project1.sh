@@ -71,8 +71,10 @@ plink --bfile test21.clean --noweb --keep sampleID_west.txt --recode --make-bed 
 plink --bfile test21.clean --pca 10 --out ./PCA_for_10/test21_pca10.clean
 plink --bfile test21.clean.west --pca 10 --out ./PCA_for_10/test21_pca10.clean.west 
 plink --bfile test21.clean.east --pca 10 --out ./PCA_for_10/test21_pca10.clean.east 
+Rscript do_PCA.r
 
 ####admixture###### 
 #find the K with the lowest number of errors
 for i in 2 3 4 5; do admixture --cv test21.clean.bed $i; done > cvoutput
 grep -i 'CV error' cvoutput
+Rscript do_Admixture.r
