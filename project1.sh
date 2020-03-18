@@ -107,3 +107,6 @@ plink --file Gbb --het --out ./inbreed/Gbb
 plink --file Ggg --het --out ./inbreed/Ggg
 plink --file Gbg --het --out ./inbreed/Gbg
 plink --file Gbg --het --out ./inbreed/Gbg
+
+
+
