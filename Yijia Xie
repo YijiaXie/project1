@@ -1,0 +1,7 @@
+# filter data
+plink --bfile GorgorWholeGenFID --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/allsample21.clean
+plink --bfile GorgorWholeGenFID --noweb --keep GorillaID.txt --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/Gsample21.clean
+
+# separate west and east Gorilla
+plink --bfile ../Gsample21.clean --noweb --keep western_pop.txt -- --recode --make-bed --out westsample21.clean
+plink --bfile ../Gsample21.clean --noweb --keep eastern_pop.txt --ld 0.5 --recode --make-bed --out eastsample21.clean
