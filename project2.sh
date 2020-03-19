@@ -4,6 +4,7 @@
 ##filter data
 plink --bfile GorgorWholeGenFID --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/allsample21.clean
 plink --bfile GorgorWholeGenFID --noweb --keep GorillaID.txt --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/Gsample21.clean
+plink --bfile GorgorWholeGenFID --noweb --keep GorillaID.txt --chr 4 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/LD/Gsample4.clean
 
 ##separate west and east Gorilla
 plink --bfile ../Gsample21.clean --noweb --keep western_pop.txt --indep-pairwise 50 5 0.5 --recode --out west
@@ -20,7 +21,7 @@ Rscirpt do_PCA.r
 
 
 ###admixture###
-for i in 2 3 4 5; do admixture --cv ../Gsample21.clean.bed $i; done > ./cvoutput
+for i in 2 3 4 5 6; do admixture --cv ../Gsample21.clean.bed $i; done > ./cvoutput
 grep -i 'CV error' ./cvoutput
 Rscirpt do_admixture.r
 
@@ -45,4 +46,9 @@ cat Ggg.frq |grep -v NA > Ggg_noNA.frq
 plink --file ../Het/Gbb --het --out Gbb
 plink --file ../Het/Gbg --het --out Gbg
 plink --file ../Het/Ggg --het --out Ggg
+
+####LD####
+plink --bfile ./Gsample4.clean --family --keep-cluster-names Gbb --recode --out Gbb_chr4
+plink --bfile ./Gsample4.clean --family --keep-cluster-names Gbg --recode --out Gbg_chr4
+plink --bfile ./Gsample4.clean --family --keep-cluster-names Ggg --recode --out Ggg_chr4
 
