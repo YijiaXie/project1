@@ -112,7 +112,7 @@ plink --file Gbg --het --out ./inbreed/Gbg
 
 
 
-###date=0319
+###date=0319#####################################################################################################################
 awk '{print $1,$2}' GorgorWholeGen.ped #check the subspecies information of griollas
    
 # change Family ID as subspecies name, and rename other files
