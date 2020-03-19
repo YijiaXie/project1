@@ -4,6 +4,7 @@
 ##filter data
 plink --bfile GorgorWholeGenFID --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/allsample21.clean
 plink --bfile GorgorWholeGenFID --noweb --keep GorillaID.txt --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/Gsample21.clean
+#for LD
 plink --bfile GorgorWholeGenFID --noweb --keep GorillaID.txt --chr 4 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/LD/Gsample4.clean
 
 ##separate west and east Gorilla
@@ -51,4 +52,8 @@ plink --file ../Het/Ggg --het --out Ggg
 plink --bfile ./Gsample4.clean --family --keep-cluster-names Gbb --recode --out Gbb_chr4
 plink --bfile ./Gsample4.clean --family --keep-cluster-names Gbg --recode --out Gbg_chr4
 plink --bfile ./Gsample4.clean --family --keep-cluster-names Ggg --recode --out Ggg_chr4
+
+plink --file Gbb_chr4  --from 4:9029454 --to 4:14144296  --make-bed --out Gbb_chr4_Block
+plink --file Gbg_chr4  --from 4:9029454 --to 4:14144296  --make-bed --out Gbg_chr4_Block
+plink --file Ggg_chr4  --from 4:9029454 --to 4:14144296  --make-bed --out Ggg_chr4_Block
 
