@@ -39,13 +39,13 @@ WC84<-function(x,pop){
 }
 
 library(snpMatrix)
-data <- read.plink("test21.clean")
+data <- read.plink("../Gsample21.clean")
 geno <- matrix(as.integer(data@.Data),nrow=nrow(data@.Data))
 geno <- t(geno)
 geno[geno==0]<- NA
 geno<-geno-1
 g<-geno[complete.cases(geno),]
-pop<-c(rep(1,3),rep(2,3),rep(3,1),rep(4,3))
+pop<-c(rep(1,7),rep(2,9),rep(3,1),rep(4,27))
 ### HERE WE HAVE OUR THREE COMPARISONS
 pop12<-pop[ifelse(pop==1,TRUE,ifelse(pop==2,TRUE,FALSE))]
 pop13<-pop[ifelse(pop==1,TRUE,ifelse(pop==3,TRUE,FALSE))]
@@ -69,4 +69,4 @@ FST <- data.frame(FST=c(mean(result12$theta,na.rm=T), mean(result13$theta,na.rm=
                        mean(result23$theta,na.rm=T), mean(result24$theta,na.rm=T), mean(result34$theta,na.rm=T)), 
                  row.names = c('Gbb-Gbg', 'Gbb-Ggd', 'Gbb-Ggg', 'Gbg-Ggd', 'Gbg-Ggg', 'Ggd-Ggg'))
 print(FST)
-print("Done FST")
+print('Done FST')
