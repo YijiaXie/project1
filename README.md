@@ -9,6 +9,8 @@ gorilla
 
 正在进行treemix
 
+需要 查个文献证明inbreeding coefficient舍去负数
+
 
 ## 一些解释部分
 
