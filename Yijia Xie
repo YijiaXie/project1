@@ -8,3 +8,19 @@ plink --bfile ../Gsample21.clean --noweb --keep western_pop.txt --extract west.p
 
 plink --bfile ../Gsample21.clean --noweb --keep eastern_pop.txt --indep-pairwise 50 5 0.5 --recode --out east
 plink --bfile ../Gsample21.clean --noweb --keep eastern_pop.txt --extract east.prune.in --make-bed --out eastpurned21.clean
+
+
+# Het
+plink --bfile ../Gsample21.clean --family --keep-cluster-names Gbb --recode --out Gbb
+plink --bfile ../Gsample21.clean --family --keep-cluster-names Gbg --recode --out Gbg
+plink --bfile ../Gsample21.clean --family --keep-cluster-names Ggd --recode --out Ggd
+plink --bfile ../Gsample21.clean --family --keep-cluster-names Ggg --recode --out Ggg
+
+plink --noweb --file Gbb --freq --out Gbb
+plink --noweb --file Gbg --freq --out Gbg
+plink --noweb --file Ggd --freq --out Ggd
+plink --noweb --file Ggg --freq --out Ggg
+cat Gbb.frq |grep -v NA > Gbb_noNA.frq
+cat Gbg.frq |grep -v NA > Gbg_noNA.frq
+cat Ggd.frq |grep -v NA > Ggd_noNA.frq
+cat Ggg.frq |grep -v NA > Ggg_noNA.frq
