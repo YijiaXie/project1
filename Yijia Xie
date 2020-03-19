@@ -24,3 +24,11 @@ cat Gbb.frq |grep -v NA > Gbb_noNA.frq
 cat Gbg.frq |grep -v NA > Gbg_noNA.frq
 cat Ggd.frq |grep -v NA > Ggd_noNA.frq
 cat Ggg.frq |grep -v NA > Ggg_noNA.frq
+
+# Inbreeding
+plink --file ../Het/Gbb --het --out Gbb
+plink --file ../Het/Gbg --het --out Gbg
+plink --file ../Het/Ggg --het --out Ggg
+
+
+
