@@ -1,7 +1,7 @@
 # project1
 gorilla
 
-进度：
+## 进度：
 
 已经完成PCA（没有删除LD），admixture，fst，inbreedingcoefficient，het，
 
@@ -10,7 +10,7 @@ gorilla
 正在进行treemix
 
 
-##### 一些解释部分#####
+## 一些解释部分
 
 关于PCA使用LD的解释:
 
