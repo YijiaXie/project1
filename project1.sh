@@ -26,7 +26,30 @@ plink --file test10 --make-bed --out test10
 plink --bfile test10 --chr 21 --hwe .001 --geno 0.02 --thin 0.8 --maf 0.05 --make-bed --out test21
 
 #########END###########
-
+# we change FamilyID as name of each subspecies --> GorgorWholeGenFID.ped/map/log
+# sampleID.txt includes 10 selected individuals
+plink --bfile GorgorWholeGenFID --noweb --keep sampleID.txt --make-bed --out ../datatest21/test10
+# select chromosome 4 and some filters
+plink --bfile test10 --chr 4 --hwe .001 --geno 0.02 --thin 0.25 --maf 0.15 --make-bed --out chr4.clean
+# separate each subspecies
+plink --bfile chr4.clean --family --keep-cluster-names Gbb --recode --out Gbb
+plink --bfile chr4.clean --family --keep-cluster-names Gbg --recode --out Gbg   
+plink --bfile chr4.clean --family --keep-cluster-names Ggd --recode --out Ggd   
+plink --bfile chr4.clean --family --keep-cluster-names Ggg --recode --out Ggg  
+# we tried several times, according to position of SNPs in exercise, different number of SNPs in different blocks
+plink --file Gbb --from 4:9029832 --to 4:14148683 --make-bed --out Gbb_block # 3000
+plink --file Gbb --from 4:9029454 --to 4:10856147 --make-bed --out Gbb_block2 # 1000
+plink --file Gbb --from 4:10633450 --to 4:11878724 --make-bed --out Gbb_block3 # 1000
+plink --file Gbb --from 4:11265033 --to 4:11878724 --make-bed --out Gbb_block4 # 500
+# in R
+library(snpMatrix)
+data<- read.plink("Gbb_block")
+# we tried different 'dep'--> 100, 500, 930, 1000 for different blocks
+ld<- ld.snp(data, dep=930)
+plot.snp.dprime(ld, filename="Gbb_block.eps", res=100)
+q()
+# calculate r2
+plink --bfile Gbb_block --r2 square --out Gbb_block
 ###date=0318####################################################################################################################
 awk '{print $1,$2}' GorgorWholeGen.ped #check the subspecies information of griollas
    
