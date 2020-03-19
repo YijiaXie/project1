@@ -31,14 +31,14 @@ plot_pca_basic(pca_all, title = 'All gorilla',
 
 
 #eastern
-pca_eastern = read.table('./esat.pca10.eigenvec')
+pca_eastern = read.table('./east.pca10.eigenvec')
 names(pca_eastern) = c('Population', 'Individual', 'PC1', 'PC2', 'PC3','PC4', 'PC5', 'PC6')
 pca_eastern$Population <- factor(pca_eastern$Population , levels =c("Gbb","Gbg"))
 pca_eastern = pca_eastern[order(pca_eastern$Population),]
 png("./Eastern.png",width=800,height=800)
 plot_pca_basic(pca_eastern, title = 'Eastern gorilla',
-	xlab=paste0("PC1 (",first_pc("esat.pca10.eigenval"),"% of variance)"),
-	ylab=paste0("PC2 (",second_pc("esat.pca10.eigenval"),"% of variance)"))
+	xlab=paste0("PC1 (",first_pc("east.pca10.eigenval"),"% of variance)"),
+	ylab=paste0("PC2 (",second_pc("east.pca10.eigenval"),"% of variance)"))
 
 #western
 pca_western = read.table('west.pca10.eigenvec')
