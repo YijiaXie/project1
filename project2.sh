@@ -5,7 +5,7 @@
 plink --bfile GorgorWholeGenFID --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/allsample21.clean
 plink --bfile GorgorWholeGenFID --noweb --keep GorillaID.txt --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/Gsample21.clean
 
-##eparate west and east Gorilla
+##separate west and east Gorilla
 plink --bfile ../Gsample21.clean --noweb --keep western_pop.txt --indep-pairwise 50 5 0.5 --recode --out west
 plink --bfile ../Gsample21.clean --noweb --keep western_pop.txt --extract west.prune.in --make-bed --out westpurned21.clean
 plink --bfile ../Gsample21.clean --noweb --keep eastern_pop.txt --indep-pairwise 50 5 0.5 --recode --out east
@@ -14,7 +14,7 @@ plink --bfile ../Gsample21.clean --noweb --keep eastern_pop.txt --extract east.p
 
 ###PCA###
 plink --bfile Gsample21.clean  --pca 10 --out ./PCA/Gsample21.pca10
-plink --bfile eastpurned21.clean  --pca 10 --out ./esat.pca10
+plink --bfile eastpurned21.clean  --pca 10 --out ./east.pca10
 plink --bfile westpurned21.clean  --pca 10 --out ./west.pca10
 Rscirpt do_PCA.r
 
