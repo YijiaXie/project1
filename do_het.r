@@ -1,5 +1,3 @@
-###heterozygosity
-
 gbb<-read.table("Gbb_noNA.frq",h=T)
 gbg<-read.table("Gbg_noNA.frq",h=T)
 ggd<-read.table("Ggd_noNA.frq",h=T)
@@ -26,9 +24,9 @@ ggg <- cbind(ggg, pi=het(ggg$MAF) *(length(ggg$MAF)/(ggg[length(ggg[,"position"]
 
 
 # Making a barplot with the nucleotide diversity
-png('./piplot.png')
+png('./piplot.png',width=800,height=800)
 par(mfrow=c(1,1))
 val = c(mean(gbb$pi), mean(gbg$pi), mean(ggd$pi), mean(ggg$pi)) 
-barplot(val,ylim=c(0.000,0.001), ylab="pi",  xlab="Population", names.arg=c("Gbb","Gbg","Ggd","Ggg"), main='Average heterozygosity')
+barplot(val,ylim=c(0.000,0.00015), ylab="pi",  xlab="Population", names.arg=c("Gbb","Gbg","Ggd","Ggg"), main='Average heterozygosity')
 # To shut down the plot window
-print("Done heterozygosity analysis")
+print('Done Het')
