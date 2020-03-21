@@ -21,14 +21,14 @@ par(mfrow=c(4,1))
 barplot(t(as.matrix(snpk2)),
         col= c("lightblue","Dark red"),
          border=NA, main="K=2",
-         names.arg=(names), cex.names=0.55, las=2, ylab="ancestry")
+         cex.names=0.55, las=2, ylab="ancestry")
 barplot(t(as.matrix(snpk3)),
         col= c("lightgreen","Dark red","lightblue"),
         border=NA, main="K=3",
-        names.arg=(names), cex.names=0.55, las=2, ylab="ancestry")
+        cex.names=0.55, las=2, ylab="ancestry")
 barplot(t(as.matrix(snpk4)),
         col= c("lightgreen","Dark red","lightblue","yellow"),
-        border=NA, main="K=4", names.arg=(names), cex.names=0.55, las=2,
+        border=NA, main="K=4",cex.names=0.55, las=2,
         ylab="ancestry")
 barplot(t(as.matrix(snpk5)),
         col= c("lightgreen","Dark red","lightblue","yellow","pink"),
