@@ -48,7 +48,7 @@ plink --file ../Het/Gbb --het --out Gbb
 plink --file ../Het/Gbg --het --out Gbg
 plink --file ../Het/Ggg --het --out Ggg
 
-####LD####
+####LD block####
 plink --bfile ./Gsample4.clean --family --keep-cluster-names Gbb --recode --out Gbb_chr4
 plink --bfile ./Gsample4.clean --family --keep-cluster-names Gbg --recode --out Gbg_chr4
 plink --bfile ./Gsample4.clean --family --keep-cluster-names Ggg --recode --out Ggg_chr4
