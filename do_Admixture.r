@@ -34,3 +34,4 @@ barplot(t(as.matrix(snpk5)),
         col= c("lightgreen","Dark red","lightblue","yellow","pink"),
         border=NA, main="K=5", names.arg=(names), cex.names=0.55, las=2,
         ylab="ancestry")
+print("Done admixture plotting")
