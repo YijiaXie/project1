@@ -20,13 +20,14 @@ plot_pca_basic <- function(pca_df, title, xlab, ylab){
     legend(x="topleft", legend = levels(pca_df$Population), cex=2,
            fill = palette()[1:length(levels(pca_df$Population))],)
 }
+#colors=c("darkred","lightgreen","palevioletred1","lightblue")
 
 #All
 pca_all = read.table('./Gsample21.pca10.eigenvec')
 names(pca_all) = c('Population', 'Individual', 'PC1', 'PC2', 'PC3','PC4', 'PC5', 'PC6','PC7', 'PC8', 'PC9','PC10')
 pca_all$Population <- factor(pca_all$Population , levels =c("Gbb","Gbg","Ggd","Ggg"))
 pca_all = pca_all[order(pca_all$Population),]
-png("./PCA.All.png", width=1500, height=500,res=100)
+png("./PCA.All.png", width=1500, height=500)
 par(mfrow=c(1,3))
 plot_pca_basic(pca_all, title = 'All gorilla',
         xlab=paste0("PC1 (",first_pc("Gsample21.pca10.eigenval"),"% of variance)"),
