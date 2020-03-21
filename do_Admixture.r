@@ -16,7 +16,7 @@ names=c('Gbb-Maisha', 'Gbb-N010_Turimaso', 'Gbb-SC_EGWGS5386356_Zirikana',
 'Ggg-B650_Katie', 'Ggg-KB3782_Vila', 'Ggg-KB3784_Dolly', 'Ggg-KB4986_Katie',
 'Ggg-KB5792_Carolyn', 'Ggg-KB5852_Helen', 'Ggg-KB6039_Oko', 'Ggg-KB7973_Porta',
 'Ggg-X00108_Abe', 'Ggg-X00109_Tzambo')
-png('./admixture.png', width=1200, height=800)
+png('./admixture.png', width=1200, height=800,res=100)
 par(mfrow=c(4,1))
 barplot(t(as.matrix(snpk2)),
         col= c("lightblue","Dark red"),
