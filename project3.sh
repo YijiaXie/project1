@@ -1,8 +1,5 @@
 #先分类再filter
 
-plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --family --keep-cluster-names Gbb --recode --out Gbb_LD
-plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --family --keep-cluster-names Gbg --recode --out Gbg_LD
-plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --family --keep-cluster-names Ggd --recode --out Ggd_LD
 plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --chr 21 --family --keep-cluster-names Gbb --recode --out Gbb_LD
 plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --chr 21 --family --keep-cluster-names Gbg --recode --out Gbg_LD
 plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --chr 21 --family --keep-cluster-names Ggd --recode --out Ggd_LD
