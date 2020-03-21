@@ -57,3 +57,30 @@ plink --file Gbb_chr4  --from 4:9029454 --to 4:14144296  --make-bed --out Gbb_ch
 plink --file Gbg_chr4  --from 4:9029454 --to 4:14144296  --make-bed --out Gbg_chr4_Block
 plink --file Ggg_chr4  --from 4:9029454 --to 4:14144296  --make-bed --out Ggg_chr4_Block
 
+####LD decay#### ？？？
+plink --bfile GorgorWholeGenFID --noweb --keep GorillaID.txt --not-chr xy --hwe .001 --geno 0.02 --thin 0.02 --maf 0.15 --make-bed --out ../autosome/Gsample.clean
+plink --bfile Gsample.clean --family --keep-cluster-names Gbb --make-bed --out Gbbauto
+plink --bfile Gsample.clean --family --keep-cluster-names Gbg --make-bed --out Gbgauto
+plink --bfile Gsample.clean --family --keep-cluster-names Ggg --make-bed --out Gggauto
+
+plink --bfile Gbbauto --r2 square --out Gbbauto
+plink --bfile Gbgauto --r2 square --out Gbgauto
+plink --bfile Gggauto --r2 square --out Gggauto
+
+###
+awk '{$2 = substr($2,3);print $0}' Gbb_chr4.map > Gbb2_chr4.map
+rm Gbb_chr4.map
+mv Gbb2_chr4.map Gbb_chr4.map
+plink --file Gbb_chr4 --make-bed --out Gbb_chr4
+
+awk '{$2 = substr($2,3);print $0}' Gbg_chr4.map > Gbg2_chr4.map
+rm Gbg_chr4.map
+mv Gbg2_chr4.map Gbg_chr4.map
+plink --file Gbg_chr4 --make-bed --out Gbg_chr4
+
+awk '{$2 = substr($2,3);print $0}' Ggg_chr4.map > Ggg2_chr4.map
+rm Ggg_chr4.map
+mv Ggg2_chr4.map Ggg_chr4.map
+plink --file Ggg_chr4 --make-bed --out Ggg_chr4
+
+
