@@ -3,7 +3,7 @@ gorilla
 
 ## 进度：
 
-已经完成：
+### 已经完成：
 
 【21号全部个体】
 
@@ -22,12 +22,10 @@ LD decay
 
 Ne(全部个体的常染色体来算，分别选了七个，共21个
 
-正在进行：
-
+### 正在进行：
 fst，
 
-待定：
-
+## 待定：
 treemix（人root？）
 
 需要： 查个文献证明inbreeding coefficient舍去负数，treemix 意义
