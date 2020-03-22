@@ -28,6 +28,9 @@ Additionally, **individuals found to be very closely related to another on the b
 在教程的最后：
 http://gensoft.pasteur.fr/docs/treemix/1.12/treemix_manual_10_1_2012.pdf
 
+admixture:
+http://inquiry.unh.edu/appdocs/admixture-manual.pdf
+
 其他参考文献：
 
 https://www-tandfonline-com.ep.fjernadgang.kb.dk/doi/full/10.1080/14772000.2017.1359215  有类似图
