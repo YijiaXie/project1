@@ -56,4 +56,4 @@ par(mar=c(10,6,4,2))
 barplot(for_ratio_barplot, col = "gray", beside = TRUE, las=2, #axes = FALSE,
        main = "Ne/Nc ratios for each population",ylab = '')
 mtext('Ne/Nc ratio', side=2, line=4.2)
-print("Done Ne_Nc_plot"
+print("Done Ne_Nc_plot")
