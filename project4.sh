@@ -1,4 +1,6 @@
 ########## Linux ##########
+cd /home/personal/groupdirs/SCIENCE-BIO-popgen_course-project/Gorilla/data/GorgorStudent
+mkdir ../allsample 
 ## change Family ID as subspecies name, and rename other files
 awk '{$1 = substr($1,1,3);print $0}' GorgorWholeGen.ped > GorgorWholeGenFID.ped
 cp GorgorWholeGen.map > GorgorWholeGenFID.map
@@ -9,7 +11,11 @@ plink --bfile GorgorWholeGenFID --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --ma
 nano GorillaID.txt  ## create a file including family ID and sample ID of all samples
 plink --bfile GorgorWholeGenFID --noweb --keep GorillaID.txt --chr 21 --hwe .001 --geno 0.02 --thin 0.15 --maf 0.15 --make-bed --out ../allsample/Gsample21.clean
 
+cd ../allsample
+mkdir PCA admixture Heter Ne LD21 treemix FST Inbreeding
+
 ###PCA###
+cd ../PCA
 ##separate west and east Gorilla
 nano western_pop.txt  ## create a file including all western samples
 nano eastern_pop.txt  ## create a file including all eastern samples
@@ -24,6 +30,8 @@ plink --bfile westpurned21.clean  --pca 10 --out ./west.pca10
 Rscript do_PCA.r
 
 ###admixture###
+cd ../admixture
+#filter LD 
 plink --bfile ../Gsample21.clean --indep-pairwise 50 10 0.5
 plink --bfile ../Gsample21.clean --extract plink.prune.in --make-bed --out prunedData
 for i in 2 3 4 5 6; do admixture --cv prunedData.bed $i; done > cvoutput
@@ -33,13 +41,16 @@ nano CVerror.txt
 Rscript do_CVerrorplot.r
 
 ###FST###
+cd ../FST
 Rscript do_FST.r
 
 ###Heterozygosity###
-plink --bfile ../Gsample21.clean --family --keep-cluster-names Gbb --recode --out Gbb
-plink --bfile ../Gsample21.clean --family --keep-cluster-names Gbg --recode --out Gbg
-plink --bfile ../Gsample21.clean --family --keep-cluster-names Ggd --recode --out Ggd
-plink --bfile ../Gsample21.clean --family --keep-cluster-names Ggg --recode --out Ggg
+cd ../Heter 
+#no filter
+plink --bfile ../Ne/gorilla --chr 21  --family --keep-cluster-names Gbb --recode --out Gbb
+plink --bfile ../Ne/gorilla --chr 21  --family --keep-cluster-names Gbg --recode --out Gbg
+plink --bfile ../Ne/gorilla --chr 21  --family --keep-cluster-names Ggd --recode --out Ggd
+plink --bfile ../Ne/gorilla --chr 21  --family --keep-cluster-names Ggg --recode --out Ggg
 
 plink --noweb --file Gbb --freq --out Gbb
 plink --noweb --file Gbg --freq --out Gbg
@@ -94,7 +105,8 @@ plink --file Gbg --make-bed --out Gbg
 plink --file Gbb --make-bed --out Gbb
 Rscript do_LDdecay.r
 
-###Ne###  
+###Ne###
+cd ../Ne
 plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --noweb --keep GorillaID.txt --recode --out gorilla 
 plink --file gorilla --make-bed --out gorilla
 plink --bfile gorilla --not-chr xy --make-bed --out gorilla.clean
@@ -115,6 +127,7 @@ Rscript do_NEestimate.r
 ###Ne/Nc###
 
 ###TreeMix###
+cd../Treemix
 plink --bfile ../allsample21.clean  --freq --missing --within allsample21.clean.clust
 gzip plink.frq.strat
 python plink2treemix.py plink.frq.strat.gz  treemix.gz
