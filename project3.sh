@@ -14,8 +14,6 @@ plink --bfile ../Gsample21.clean --family --keep-cluster-names Gbb --recode --ou
 plink --bfile ../Gsample21.clean --family --keep-cluster-names Gbg --recode --out Gbg
 plink --bfile ../Gsample21.clean --family --keep-cluster-names Ggg --recode --out Ggg
 
-
-####Ne## ？？？
 awk '{$2 = substr($2,4);print $0}' Gbb.map > Gbb2.map
 rm Gbb.map 
 mv Gbb2.map Gbb.map 
@@ -28,6 +26,7 @@ awk '{$2 = substr($2,4);print $0}' Ggg.map > Ggg2.map
 rm Ggg.map 
 plink --file Ggg --make-bed --out Ggg
 
+####Ne##  (在autosome文件夹)
 plink --file gorilla --make-bed --out gorilla
 plink --bfile gorilla --not-chr xy --make-bed --out gorilla.clean
 
@@ -42,6 +41,20 @@ plink --bfile Gbg.clean --r2 square --out Gbg.clean
 plink --bfile Ggg.clean --r2 square --out Ggg.clean
 
 
+####treemix#####
+awk '{print $1,$2,$2}' ../GorgorStudent/GorgorWholeGenFID.ped > allsample21.clean.clust
+awk '{print $1,$2,$1}' ../GorgorStudent/GorgorWholeGenFID.ped > allfamily21.clean.clust
 
+cd treemix
+#individual
+plink --bfile ../allsample21.clean --freq --missing --within ./allsample21.clean.clust --out allsample21
+gzip allsample21.frq.strat 
+python ./treemix-1.13/plink2treemix.py  allsample21.frq.strat.gz  tree_allsample21.gz
+treemix -i tree_allsample21.gz  -o tree_allsample21
+#subpopulation
+plink --bfile ../Gsample21.clean --freq --missing --within ./allfamily21.clean.clust --out allfamily21
+gzip allfamily21.frq.strat 
+python ./treemix-1.13/plink2treemix.py  allfamily21.frq.strat.gz  tree_allsample21.gz
+treemix -i tree_allfamily21.gz -o tree_allfamily21
 
 
