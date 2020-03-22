@@ -18,6 +18,7 @@ text(25, 0.175, 'U-N')
 text(25, 0.275, 'B-S')
 print("Done inbreeding plotting")
 
+
 ######################################
 
  FID                            IID       O(HOM)       E(HOM)        N(NM)            F
