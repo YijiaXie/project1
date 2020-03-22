@@ -5,12 +5,18 @@ gorilla
 
 已经完成：
 
-【21号全部个体】已经完成PCA（全部亚种）（东和西，都删除了LD），admixture，fst，inbreedingcoefficient，het，
-【4号全部个体】 LD
+【21号全部个体】
+已经完成PCA（全部亚种）（东和西，都删除了LD），
+admixture(删除LD），
+fst，
+inbreedingcoefficient，
+het（没有进行filter），
+LD block（先分类再filter）
+LD decay
+Ne(全部个体的常染色体来算，分别选了七个，共21个）
 
-卡住的是 LD decay, L r2, 和Ne(全部个体的常染色体来算）
-
-正在进行treemix
+待定：
+treemix（人root？）
 
 需要： 查个文献证明inbreeding coefficient舍去负数，treemix 意义
 
