@@ -24,7 +24,9 @@ plink --bfile westpurned21.clean  --pca 10 --out ./west.pca10
 Rscript do_PCA.r
 
 ###admixture###
-for i in 2 3 4 5 6; do admixture --cv ../Gsample21.clean.bed $i; done > ./cvoutput
+plink --bfile ../Gsample21.clean --indep-pairwise 50 10 0.5
+plink --bfile ../Gsample21.clean --extract plink.prune.in --make-bed --out prunedData
+for i in 2 3 4 5 6; do admixture --cv prunedData.bed $i; done > cvoutput
 grep -i 'CV error' ./cvoutput
 Rscirpt do_Admixture.r
 nano CVerror.txt
