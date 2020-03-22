@@ -53,14 +53,16 @@ cat Ggg.frq |grep -v NA > Ggg_noNA.frq
 Rscript do_het.r
 
 ####inbreeding coefficient###
-plink --file Gbb --het --out ./inbreed/Gbb
-plink --file Ggg --het --out ./inbreed/Ggg
-plink --file Gbg --het --out ./inbreed/Gbg
-plink --file Gbg --het --out ./inbreed/Gbg
+plink --file Gbb --het --out ../Inbreeding/Gbb
+plink --file Ggg --het --out ../Inbreeding/Ggg
+plink --file Gbg --het --out ../Inbreeding/Gbg
+plink --file Ggd --het --out ../Inbreeding/Ggd
+cd ../Inbreeding
 nano inbreeding.txt ## create a file including all results based on above code
 Rscript do_Inbreedingplot.r
 
 ###LD block###
+cd ../LD21
 plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --chr 21 --family --keep-cluster-names Gbb --recode --out Gbb_LD
 plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --chr 21 --family --keep-cluster-names Gbg --recode --out Gbg_LD
 plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --chr 21 --family --keep-cluster-names Ggd --recode --out Ggd_LD
