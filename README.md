@@ -10,16 +10,13 @@ gorilla
 
 admixture(删除LD），
 
-
-inbreedingcoefficient，
-
-het（没有进行filter），
+het（没有进行filter），inbreedingcoefficient，
 
 LD block（先分类再filter）
 
 LD decay
 
-Ne(全部个体的常染色体来算，分别选了七个，共21个
+Ne(全部个体的常染色体来算，分别选了七个，共21个）
 
 ### 正在进行：
 fst，
