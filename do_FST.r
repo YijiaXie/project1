@@ -39,14 +39,14 @@ WC84<-function(x,pop){
 }
 
 library(snpMatrix)
-data <- read.plink("../Gsample21.clean")
+data <- read.plink("../admixture/prunedData")
 geno <- matrix(as.integer(data@.Data),nrow=nrow(data@.Data))
 geno <- t(geno)
 geno[geno==0]<- NA
 geno<-geno-1
 g<-geno[complete.cases(geno),]
 pop<-c(rep(1,7),rep(2,9),rep(3,1),rep(4,27))
-### HERE WE HAVE OUR THREE COMPARISONS
+### COMPARISONS in 4 
 pop12<-pop[ifelse(pop==1,TRUE,ifelse(pop==2,TRUE,FALSE))]
 pop13<-pop[ifelse(pop==1,TRUE,ifelse(pop==3,TRUE,FALSE))]
 pop14<-pop[ifelse(pop==1,TRUE,ifelse(pop==4,TRUE,FALSE))]
@@ -65,8 +65,35 @@ result14<-WC84(t(g14),pop14)
 result23<-WC84(t(g23),pop23)
 result24<-WC84(t(g24),pop24)
 result34<-WC84(t(g34),pop34)
+
+#esat vs west 
+pop_ew<-c(rep(1,16),rep(2,28))
+pop_evsw<-pop_ew[ifelse(pop_ew==1,TRUE,ifelse(pop_ew==2,TRUE,FALSE))]
+g_evsw<-g[,ifelse(pop_ew==1,TRUE,ifelse(pop_ew==2,TRUE,FALSE))]
+result_evsw<-WC84(t(g_evsw),pop_evsw)
+
+# 4 vs total
+gg<-cbind(g,g)
+pop_t<-c(rep(1,7),rep(2,9),rep(3,1),rep(4,27),rep(5,44))
+pop15<-pop_t[ifelse(pop_t==1,TRUE,ifelse(pop_t==5,TRUE,FALSE))]
+pop25<-pop_t[ifelse(pop_t==2,TRUE,ifelse(pop_t==5,TRUE,FALSE))]
+pop35<-pop_t[ifelse(pop_t==3,TRUE,ifelse(pop_t==5,TRUE,FALSE))]
+pop45<-pop_t[ifelse(pop_t==4,TRUE,ifelse(pop_t==5,TRUE,FALSE))]
+g15<-gg[,ifelse(pop_t==1,TRUE,ifelse(pop_t==5,TRUE,FALSE))]
+g25<-gg[,ifelse(pop_t==2,TRUE,ifelse(pop_t==5,TRUE,FALSE))]
+g35<-gg[,ifelse(pop_t==3,TRUE,ifelse(pop_t==5,TRUE,FALSE))]
+g45<-gg[,ifelse(pop_t==4,TRUE,ifelse(pop_t==5,TRUE,FALSE))]
+result15<-WC84(t(g15),pop15)
+result25<-WC84(t(g25),pop25)
+result35<-WC84(t(g35),pop35)
+result45<-WC84(t(g45),pop45)
+
+
 FST <- data.frame(FST=c(mean(result12$theta,na.rm=T), mean(result13$theta,na.rm=T), mean(result14$theta,na.rm=T), 
-                       mean(result23$theta,na.rm=T), mean(result24$theta,na.rm=T), mean(result34$theta,na.rm=T)), 
-                 row.names = c('Gbb-Gbg', 'Gbb-Ggd', 'Gbb-Ggg', 'Gbg-Ggd', 'Gbg-Ggg', 'Ggd-Ggg'))
+                       mean(result23$theta,na.rm=T), mean(result24$theta,na.rm=T), mean(result34$theta,na.rm=T),
+                        mean(result_evsw$theta,na.rm=T),mean(result15$theta,na.rm=T), mean(result25$theta,na.rm=T),
+                        mean(result35$theta,na.rm=T), mean(result45$theta,na.rm=T)), 
+                 row.names = c('Gbb-Gbg', 'Gbb-Ggd', 'Gbb-Ggg', 'Gbg-Ggd', 'Gbg-Ggg', 'Ggd-Ggg',"East-West",
+                              "Gbb-total","Gbg-total","Ggd-total","Ggg-total"))
 print(FST)
 print('Done FST')
