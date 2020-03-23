@@ -1,22 +1,25 @@
 data <- read.table('inbreeding.txt', sep = '', header = T)
-data$FID <- factor(data$FID)
-data$IID <- factor(data$IID)
+newdata <- data[data$F > 0, ]
+newdata$FID <- factor(newdata$FID)
+newdata <- newdata[order(newdata$FID, newdata$F), ]
+png('ieboxplot.png', width = 500, height = 700,res=100)
+boxplot(F ~ FID, newdata, ylab = 'Inbreeding coefficient', border = c("darkred","chartreuse3", "dodgerblue2"))
+#dev.off()
 
-png('inbreeding.png', width = 1000, height = 800)
-barplot(data[,6], col=ifelse(data[,1] == 'Gbb', 'darkred', ifelse(data[,1] == 'Gbg','chartreuse3', 
-                                                                  ifelse(data[,1] == 'Ggd','palevioletred1', 'dodgerblue2'))),
-        ylab = 'Inbreeding coefficient',
-        ylim = c(-1,0.6), xlab = '')
-abline(h=0.0625, col='gray24', lty = 2)
-abline(h=0.125, col='gray24', lty = 2)
-abline(h=0.25, col='gray24', lty =2)
-legend("bottom",legend=c("Gbb","Gbg","Ggg","Ggd"),
-       fill=c("darkred","chartreuse3", "dodgerblue2","palevioletred1"))
-mtext("Subspecies", side = 1, line = 1)
-text(25, 0.0625, 'FC')
-text(25, 0.175, 'U-N')
-text(25, 0.275, 'B-S')
-print("Done inbreeding plotting")
+png('iescatterplot.png',  width = 800, height = 600,res=100)
+par(mar=c(3,6,2,2))
+plot(seq(1,34), newdata$F, ylim = c(0,0.5), xaxt = "n", xlab = '', ylab = '', 
+     col = c(rep('darkred', 4), rep('chartreuse3', 6), rep('dodgerblue2', 24)), pch = 16, las = 1, cex.lab = 1.5)
+axis(1,at = c(1, 6, 23),labels=c('Gbb','Gbg','Ggg'))
+mtext("Inbreeding coefficient", side = 2, line = 4)
+axis(2,at = c(0.0625, 0.125, 0.25), las = 1)
+abline(h=0.0625, col='grey', lty = 2)
+abline(h=0.125, col='grey', lty = 2)
+abline(h=0.25, col='grey', lty =2)
+legend("top",legend=c("Gbb","Gbg","Ggg"),
+       col=c("darkred","chartreuse3", "dodgerblue2"), pch = 16)
+
+print("Done Inbreeding plotting")
 
 
 ######################################
