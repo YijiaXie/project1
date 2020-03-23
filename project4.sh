@@ -61,14 +61,15 @@ cat Gbb.frq |grep -v NA > Gbb_noNA.frq
 cat Gbg.frq |grep -v NA > Gbg_noNA.frq
 cat Ggd.frq |grep -v NA > Ggd_noNA.frq
 cat Ggg.frq |grep -v NA > Ggg_noNA.frq
+## pi along chromosome
 Rscript do_het.r
 
 ####inbreeding coefficient###
+cd ../Inbreeding
 plink --file Gbb --het --out ../Inbreeding/Gbb
 plink --file Ggg --het --out ../Inbreeding/Ggg
 plink --file Gbg --het --out ../Inbreeding/Gbg
 plink --file Ggd --het --out ../Inbreeding/Ggd
-cd ../Inbreeding
 nano inbreeding.txt ## create a file including all results based on above code
 Rscript do_Inbreedingplot.r
 
@@ -107,7 +108,7 @@ Rscript do_LDdecay.r
 
 ###Ne###
 cd ../Ne
-plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --noweb --keep GorillaID.txt --recode --out gorilla 
+plink --bfile ../../Gorgorstudent/GorgorWholeGenFID --noweb --keep ../../Gorgorstudent/GorillaID.txt --recode --out gorilla 
 plink --file gorilla --make-bed --out gorilla
 plink --bfile gorilla --not-chr xy --make-bed --out gorilla.clean
 nano GbgsampleID.txt  ## choose 7 individuals from Gbg individuals
