@@ -29,7 +29,7 @@ png('./piplot.png',width=400,height=800, res=100)
 val = c(mean(gbb$pi), mean(gbg$pi), mean(ggd$pi), mean(ggg$pi)) 
 barplot(val,ylim=c(0.000,0.0013), ylab="pi",  xlab="Population", names.arg=c("Gbb","Gbg","Ggd","Ggg"), main='Average heterozygosity')
 
-#######n
+###Estimating the nucleotide diversity along the chromosome###
 slidingwindowplot <- function(mainv, xlabv, ylabv, ylimv, window.size, step.size,input_x_data,input_y_data)
 {
 	if (window.size > step.size)
