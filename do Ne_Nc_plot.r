@@ -21,39 +21,40 @@ for_ratio_barplot = data.matrix(t(estimates[,'ratio']))
 colnames(for_ratio_barplot) = estimates$Pop
 
 
-png('./Ne_estimates.png', width=650,height =650,res=100)
-par(mar=c(10,6,4,2))
-barplot(for_barplot['Ne_est',], col = "white", beside = TRUE, las=2,
-       main = "Ne estimates for each population",ylab = 'Ne')
-dev.off()
+png('./Ne_estimates.png', width=1000,height =1000,res=100)
+par(mfrow=c(2,2),mar=c(7.5,5.5,3,3))
+#par(mar=c(10,6,4,2))
+barplot(for_barplot['Ne_est',], col = "white", beside = TRUE, las=2,width=0.8,
+       main = "Ne estimates for each population",ylab = '',cex.main=1.4)
+mtext('Ne', side=2, line=4.2)
 
-png('./Ne_and_Nc_estimates.png',  width=650,height =650,res=100)
-par(mar=c(10,6,4,2))
-barplot(for_barplot, col = c("white","black"), beside = TRUE, las=2,
-       main = "Ne and Nc estimates for each population",ylab = '')
+#png('./Ne-Nc_ratios.png',width=650,height =650,res=100)
+#par(mar=c(10,6,4,2))
+barplot(for_ratio_barplot, col = "gray", beside = TRUE, las=2, #axes = FALSE,
+       main = "Ne/Nc ratios for each population",ylab = '',cex.main=1.4)
+mtext('Ne/Nc ratio', side=2, line=4.2)
+
+#png('./Ne_and_Nc_estimates.png',  width=650,height =650,res=100)
+#par(mar=c(10,6,4,2))
+barplot(for_barplot, col =c("white","grey12"), beside = TRUE, las=2,
+       main = "Ne and Nc estimates for each population",ylab = '',cex.main=1.4)
 mtext('Size', side=2, line=4.2)
 legend("top",
   c("Ne_est","Nc_est"),
-  fill = c("white","black")
+  fill = c("white","grey12")
 )
-dev.off()
 
 # same plot with a log y axis
-png('./Ne_and_Nc_estimates_log-scaled.png', width=650,height =650,res=100)
-par(mar=c(10,6,4,2))
-barplot(for_barplot, col = c("white","black"), beside = TRUE, las=2,
+#png('./Ne_and_Nc_estimates_log-scaled.png', width=650,height =650,res=100)
+#par(mar=c(10,6,4,2))
+barplot(for_barplot, col = c("white","grey12"), beside = TRUE, las=2,
         log = 'y',
-       main = "Ne and Nc estimates for each population",ylab = '')
+       main = "Ne and Nc estimates for each population",ylab = '',cex.main=1.4)
 mtext('Size (log scaled)', side=2, line=4.2)
 legend("top",
   c("Ne_est","Nc_est"),
-  fill = c("white","black")
+  fill =  c("white","grey12")
 )
-dev.off()
 
-png('./Ne-Nc_ratios.png',width=650,height =650,res=100)
-par(mar=c(10,6,4,2))
-barplot(for_ratio_barplot, col = "gray", beside = TRUE, las=2, #axes = FALSE,
-       main = "Ne/Nc ratios for each population",ylab = '')
-mtext('Ne/Nc ratio', side=2, line=4.2)
 print("Done Ne_Nc_plot")
+
